@@ -16,7 +16,8 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddSwagger()
     .AddDatabaseContext(builder.Configuration)
-    .AddRepositories();
+    .AddRepositories()
+    .AddServices();
 
 var app = builder.Build();
 

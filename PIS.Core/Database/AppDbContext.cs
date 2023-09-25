@@ -2,6 +2,7 @@
 using ECommerce.Api.Core.Database.EntityConfigurations;
 using ECommerce.Api.Core.Database.Extensions;
 using Microsoft.EntityFrameworkCore;
+using PIS.Core.Database.Entities;
 
 namespace ECommerce.Api.Core.Database;
 
@@ -13,6 +14,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<GLPR> GLPRs { get; set; }
     public virtual DbSet<TypePr> TypePrs { get; set; }
     public virtual DbSet<Spec> Specs { get; set; }
+    public virtual DbSet<StrRozv> StrRozvs { get; set; }
 
     /// <summary>
     /// Initializes <see cref="AppDbContext"/>.

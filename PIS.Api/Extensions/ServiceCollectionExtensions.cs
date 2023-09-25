@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using PIS.Core.Repositories.GLPRs;
 using PIS.Core.Repositories.Specs;
+using PIS.Core.Repositories.StrRozvs;
+using PIS.Core.Services;
 
 namespace ECommerce.Api.Extensions;
 
@@ -53,6 +55,19 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITypePrsRepository, TypePrsRepository>();
         services.AddScoped<IGLPRsRepository, GLPRsRepository>();
         services.AddScoped<ISpecsRepository, SpecsRepository>();
+        services.AddScoped<IStrRozvsRepository, StrRozvsRepository>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds services to DI container.
+    /// </summary>
+    /// <param name="services">Service collection.</param>
+    /// <returns>Service collection.</returns>
+    public static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services.AddScoped<IStrRozvsService, StrRozvsService>();
 
         return services;
     }

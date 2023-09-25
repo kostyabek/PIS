@@ -67,4 +67,13 @@ public class SpecsRepository : ISpecsRepository
             .Select(e => new DetailDto(e.CdSb, e.Sb.NmPr, e.QtyKp))
             .ToListAsync();
     }
+
+    public Task<List<SpecDto>> GetSpecsAsync(string cdSb)
+    {
+        return _dbContext.Specs
+            .AsNoTracking()
+            .Where(e => e.CdSb == cdSb)
+            .Select(e => new SpecDto(e.CdSb, e.CdKp, e.QtyKp))
+            .ToListAsync();
+    }
 }

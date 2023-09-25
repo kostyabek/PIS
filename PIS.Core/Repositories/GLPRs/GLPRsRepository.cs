@@ -22,9 +22,19 @@ public class GLPRsRepository : IGLPRsRepository
         return new GLPRDto(glpr.CdPr, glpr.NmPr, glpr.CdTp);
     }
 
+    public Task<List<GLPRDto>> GetGLPRsAsync(int cdTp)
+    {
+        return _dbContext.GLPRs
+            .AsNoTracking()
+            .Where(e => e.CdTp == cdTp)
+            .Select(e => new GLPRDto(e.CdPr, e.NmPr, e.CdTp))
+            .ToListAsync();
+    }
+
     public Task<GLPRDto?> GetGLPRAsync(string CdPr)
     {
         return _dbContext.GLPRs
+            .AsNoTracking()
             .Where(e => e.CdPr == CdPr)
             .Select(e => new GLPRDto(e.CdPr, e.NmPr, e.CdTp))
             .SingleOrDefaultAsync();
