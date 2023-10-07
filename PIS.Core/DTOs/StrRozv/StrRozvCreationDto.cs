@@ -5,5 +5,4 @@ public record StrRozvCreationDto(
     string CdSb,
     string CdKp,
     int QtyKp,
-    int RivNb,
-    int RivGrf);
+    int RivNb);

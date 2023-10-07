@@ -8,7 +8,7 @@ internal class StrRozvEntityTypeConfiguration : IEntityTypeConfiguration<StrRozv
 {
     public void Configure(EntityTypeBuilder<StrRozv> builder)
     {
-        builder.HasKey(e => new { e.CdKp, e.CdSb, e.CdVyr });
+        builder.HasKey(e => new { e.CdKp, e.CdSb, e.CdVyr, e.RivNb });
 
         builder.HasOne(e => e.Vyr)
             .WithMany()

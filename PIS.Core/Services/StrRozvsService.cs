@@ -11,13 +11,16 @@ public class StrRozvsService : IStrRozvsService
 {
     private readonly IGLPRsRepository _glprsRepository;
     private readonly ISpecsRepository _specsRepository;
+    private readonly IStrRozvsRepository _strRozvsRepository;
 
     public StrRozvsService(
         IGLPRsRepository glprsRepository,
-        ISpecsRepository specsRepository)
+        ISpecsRepository specsRepository,
+        IStrRozvsRepository strRozvsRepository)
     {
         _glprsRepository = glprsRepository;
         _specsRepository = specsRepository;
+        _strRozvsRepository = strRozvsRepository;
     }
 
     public async Task<List<StrRozvDto>> GenerateStrRozvAsync()
@@ -47,7 +50,19 @@ public class StrRozvsService : IStrRozvsService
             strRozvs = strRozvs.Concat(generated).ToList();
         }
 
-        return strRozvs.OrderBy(e => e.RivNb).OrderBy(e => e.CdVyr).ToList();
+        strRozvs = strRozvs.OrderBy(e => e.RivNb).OrderBy(e => e.CdVyr).ToList();
+
+        foreach (StrRozvDto strRozv in strRozvs)
+        {
+            await _strRozvsRepository.CreateStrRozvAsync(new StrRozvCreationDto(
+                strRozv.CdVyr,
+                strRozv.CdSb,
+                strRozv.CdKp,
+                strRozv.QtyKp,
+                strRozv.RivNb));
+        }
+
+        return strRozvs;
     }
     
     public async Task<IEnumerable<StrRozvDto>> StepIntoAsync(string cdVyr, string cdKp, int rivNb, IEnumerable<StrRozvDto> initial)

@@ -30,6 +30,4 @@ public class StrRozvsRepository : IStrRozvsRepository
         await _dbContext.SaveChangesAsync();
         return new StrRozvDto(strRozv.CdVyr, strRozv.CdSb, strRozv.CdKp, strRozv.QtyKp, strRozv.RivNb);
     }
-
-    
 }
